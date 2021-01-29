@@ -1,3 +1,3 @@
 # search app
 
-## Design using mobile first approach
+## Design using desktop first approach

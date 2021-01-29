@@ -64,9 +64,13 @@ const PhotosComponent: React.FC = () => {
           {photoList?.map(({ id, title, thumbnailUrl }) => {
             return (
               <li key={id}>
-                <div>{id}</div>
-                <div>{title}</div>
-                <div>{thumbnailUrl}</div>
+                <div className="container__photos--id">{id}</div>
+                <div className="container__photos--title">{title}</div>
+                <img
+                  className="container__photos--img"
+                  src={thumbnailUrl}
+                  alt={thumbnailUrl}
+                />
               </li>
             );
           })}

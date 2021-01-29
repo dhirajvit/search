@@ -1,12 +1,59 @@
 @import "../../styles";
 .container {
   background-color: $color-primary;
+  width: 120rem;
+  margin: 0 auto;
+  @include respond(tab-port) {
+    width: 100%;
+    margin: 0 0 1rem 0;
+  }
+  &__search {
+    input {
+      height: 3rem;
+      width: 50%;
+      margin: 1rem auto;
+      background: $color-secondary;
+      border-radius: 5px;
+      @include respond(tab-port) {
+        width: 100%;
+        margin: 0 0 1rem 0;
+      }
+    }
+  }
+  &__photos {
+    ul {
+      li {
+        text-decoration: none;
+        display: flex;
+        align-content: center;
+        justify-content: space-between;
+
+        // margin: 1rem;
+        &:nth-child(odd) {
+          background-color: $color-lightgreen;
+        }
+        &:nth-child(even) {
+          background-color: $color-white;
+        }
+
+        height: 4rem;
+
+        img {
+          height: 2rem;
+          width: 2rem;
+          justify-content: center;
+        }
+      }
+    }
+  }
   &__pagination {
+    margin-top: 1rem;
     display: flex;
     justify-content: center;
     align-content: center;
     &--box {
       background-color: $color-secondary;
+      flex: 1 0 1rem;
     }
   }
 }
