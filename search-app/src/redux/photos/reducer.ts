@@ -1,26 +1,23 @@
-import { fetchPhotos } from "../../services";
 import {
   PhotosState,
-  Photos,
-  Photo,
   PhotosActionTypes,
   FETCH_PHOTOS_SUCCESS,
   SEARCH_PHOTOS_SUCCESS,
-  FETCH_PHOTOS_NEXT,
-  FETCH_PHOTOS_PREVIOUS,
+  FetchPhotosByPaginationAction,
+  FetchPhotosByPaginationActionTypes,
+  FETCH_PHOTOS_BY_PAGINATION_SUCCESS,
 } from "./types";
 const initialState: PhotosState = {
   photos: [],
   pagination: {
-    startPosition: 0,
-    endPosition: 0,
+    pageNo: 1,
   },
 };
 
 const reducer = (
   state: PhotosState = initialState,
-  action: PhotosActionTypes
-) => {
+  action: PhotosActionTypes | FetchPhotosByPaginationActionTypes
+): PhotosState => {
   switch (action.type) {
     case FETCH_PHOTOS_SUCCESS: {
       // TODO verify the boundary conditions with pagination
@@ -29,8 +26,8 @@ const reducer = (
         ...state,
         photos,
         pagination: {
-          startPosition: 0,
-          endPosition: 10,
+          ...state.pagination,
+          pageNo: 1,
         },
       };
     }
@@ -41,18 +38,24 @@ const reducer = (
         ...state,
         photos,
         pagination: {
-          startPosition: 0,
-          endPosition: 10,
+          ...state.pagination,
+          pageNo: 1,
         },
       };
     }
-    case FETCH_PHOTOS_PREVIOUS: {
-      //TODO add code
-      return state;
-    }
-    case FETCH_PHOTOS_NEXT: {
-      //TODO add code
-      return state;
+    case FETCH_PHOTOS_BY_PAGINATION_SUCCESS: {
+      // TODO verify the boundary conditions with pagination
+      const typedAction = action as FetchPhotosByPaginationAction;
+      const { photos, pageNo } = typedAction.payload;
+
+      return {
+        ...state,
+        photos,
+        pagination: {
+          ...state.pagination,
+          pageNo: pageNo,
+        },
+      };
     }
     default:
       return state;

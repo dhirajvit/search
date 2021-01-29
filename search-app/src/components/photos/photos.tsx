@@ -4,7 +4,9 @@ import "./photos.scss";
 import {
   fetchPhotosBySearchAction,
   fetchPhotosAction,
+  fetchPhotosByPaginationAction,
   selectPhotos,
+  selectPageNo,
 } from "../../redux/photos";
 import { Photos } from "../../redux/photos/types";
 const Loader = () => <div>...loading</div>;
@@ -13,6 +15,7 @@ const PhotosComponent: React.FC = () => {
   const dispatch = useDispatch();
   const [searchBy, setSearchBy] = useState("");
   const photoList: Photos | null = useSelector(selectPhotos);
+  const pageNo = useSelector(selectPageNo);
   useEffect(() => {
     const loadPhotos = async () => {
       try {
@@ -33,16 +36,17 @@ const PhotosComponent: React.FC = () => {
         console.log(ex);
       }
     };
-
     loadPhotos();
   }, [searchBy, dispatch]);
-
+  const handleClickNext = () =>
+    dispatch(fetchPhotosByPaginationAction(pageNo + 1));
+  const handleClickPrevious = () =>
+    dispatch(fetchPhotosByPaginationAction(pageNo - 1));
   if (photoList?.length === 0) {
     return <Loader />;
   }
   const handleChangeSearchBy = (e: any) => {
     //TODO replace any with React.element type for event
-    console.log(e.target.value);
     setSearchBy(e.target.value);
   };
   return (
@@ -68,7 +72,11 @@ const PhotosComponent: React.FC = () => {
           })}
         </ul>
       </section>
-      <section className="container__pagination"></section>
+      <section className="container__pagination">
+        <button onClick={handleClickPrevious}>Previous</button>
+        <div className="container__pagination--box">{pageNo}</div>
+        <button onClick={handleClickNext}>Next</button>
+      </section>
     </div>
   );
 };

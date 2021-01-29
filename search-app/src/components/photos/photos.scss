@@ -1,4 +1,12 @@
 @import "../../styles";
 .container {
   background-color: $color-primary;
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    &--box {
+      background-color: $color-secondary;
+    }
+  }
 }

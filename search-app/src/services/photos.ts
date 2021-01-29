@@ -14,3 +14,9 @@ export const fetchPhotosBySearch = async (searchBy: string) => {
     `https://jsonplaceholder.typicode.com/photos${defaultPagination}&title_like=${searchBy}`
   );
 };
+//TODO what about search and pagination both required
+export const fetchPhotosByPagination = async (page: number) => {
+  return await axios.get(
+    `https://jsonplaceholder.typicode.com/photos?_page=${page}&_limit=10`
+  );
+};
