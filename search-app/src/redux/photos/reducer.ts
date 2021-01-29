@@ -5,6 +5,7 @@ import {
   Photo,
   PhotosActionTypes,
   FETCH_PHOTOS_SUCCESS,
+  SEARCH_PHOTOS_SUCCESS,
   FETCH_PHOTOS_NEXT,
   FETCH_PHOTOS_PREVIOUS,
 } from "./types";
@@ -22,6 +23,18 @@ const reducer = (
 ) => {
   switch (action.type) {
     case FETCH_PHOTOS_SUCCESS: {
+      // TODO verify the boundary conditions with pagination
+      const { photos } = action.payload;
+      return {
+        ...state,
+        photos,
+        pagination: {
+          startPosition: 0,
+          endPosition: 10,
+        },
+      };
+    }
+    case SEARCH_PHOTOS_SUCCESS: {
       // TODO verify the boundary conditions with pagination
       const { photos } = action.payload;
       return {

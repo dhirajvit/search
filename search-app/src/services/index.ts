@@ -1,1 +1,1 @@
-export { fetchPhotos } from "./photos";
+export * from "./photos";
