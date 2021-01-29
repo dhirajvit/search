@@ -7,14 +7,4 @@
   @include respond(tab-port) {
     flex-direction: column;
   }
-  .comp1 {
-    background-color: $color-primary;
-    display: flex;
-    flex: 1 1 50%;
-  }
-  .comp2 {
-    background-color: $color-secondary;
-    display: flex;
-    flex: 1 1 50%;
-  }
 }

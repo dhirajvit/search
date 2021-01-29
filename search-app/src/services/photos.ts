@@ -1,9 +1,16 @@
-import data from "./testData.json";
+// import data from "./testData.json";
+import axios from "axios";
 
-const fetchFun = async () => new Promise((resolve, reject) => resolve(data));
+const defaultPagination = `?_page=2&_limit=10`;
+// const fetchFun = async () => new Promise((resolve, reject) => resolve(data));
 export const fetchPhotos = async () => {
-  return await fetchFun();
+  //TODO read api url from .env files
+  return await axios.get(
+    `https://jsonplaceholder.typicode.com/photos${defaultPagination}`
+  );
 };
 export const fetchPhotosBySearch = async (searchBy: string) => {
-  return await fetchFun();
+  return await axios.get(
+    `https://jsonplaceholder.typicode.com/photos${defaultPagination}&title_like=${searchBy}`
+  );
 };
