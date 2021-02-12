@@ -8,7 +8,7 @@ export const FETCH_PHOTOS_PREVIOUS = "FETCH_PHOTOS_PREVIOUS";
 export interface Photo {
   id: number;
   title: string;
-  thumbnailUrl: string;
+  url: string;
 }
 export type Photos = Array<Photo>;
 

@@ -1,5 +1,14 @@
-import { fetchPhotos, fetchPhotosBySearch, fetchPhotosByPagination } from "../../services";
-import { FETCH_PHOTOS_SUCCESS, SEARCH_PHOTOS_SUCCESS,FETCH_PHOTOS_BY_PAGINATION_SUCCESS, Photo } from "./types";
+import {
+  fetchPhotos,
+  fetchPhotosBySearch,
+  fetchPhotosByPagination,
+} from "../../services";
+import {
+  FETCH_PHOTOS_SUCCESS,
+  SEARCH_PHOTOS_SUCCESS,
+  FETCH_PHOTOS_BY_PAGINATION_SUCCESS,
+  Photo,
+} from "./types";
 
 export const fetchPhotosAction = () => {
   return async (dispatch: any) => {
@@ -7,10 +16,10 @@ export const fetchPhotosAction = () => {
     try {
       const response: any = await fetchPhotos();
       const photos: Array<Photo> = response.data.map(
-        ({ id, title, thumbnailUrl }: Photo) => ({
+        ({ id, title, url }: Photo) => ({
           id,
           title,
-          thumbnailUrl,
+          url,
         })
       );
       dispatch({
@@ -22,21 +31,21 @@ export const fetchPhotosAction = () => {
     }
   };
 };
-export const fetchPhotosByPaginationAction = (pageNo:number) => {
+export const fetchPhotosByPaginationAction = (pageNo: number) => {
   return async (dispatch: any) => {
     //TODO dispatch a request initiated
     try {
       const response: any = await fetchPhotosByPagination(pageNo);
       const photos: Array<Photo> = response.data.map(
-        ({ id, title, thumbnailUrl }: Photo) => ({
+        ({ id, title, url }: Photo) => ({
           id,
           title,
-          thumbnailUrl,
+          url,
         })
       );
       dispatch({
         type: FETCH_PHOTOS_BY_PAGINATION_SUCCESS,
-        payload: { photos,pageNo },
+        payload: { photos, pageNo },
       });
     } catch (ex) {
       //TODO dispatch a failure
@@ -50,10 +59,10 @@ export const fetchPhotosBySearchAction = (searchBy: string) => {
     try {
       const response: any = await fetchPhotosBySearch(searchBy);
       const photos: Array<Photo> = response.data.map(
-        ({ id, title, thumbnailUrl }: Photo) => ({
+        ({ id, title, url }: Photo) => ({
           id,
           title,
-          thumbnailUrl,
+          url,
         })
       );
       dispatch({

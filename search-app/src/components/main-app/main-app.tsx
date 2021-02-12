@@ -1,7 +1,7 @@
 import "./main-app.scss";
 import Photos from "../photos";
 
-const MainApp: React.FC = () => {
+const MainApp = () => {
   return (
     <div className="App">
       <Photos />
